@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
+    'board',
+    'libs',
 ]
 
 MIDDLEWARE = [
@@ -72,11 +75,19 @@ WSGI_APPLICATION = 'board_practice.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+import environ
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))  # noqa: F405
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.environ.get("DB_NAME"),  # noqa: F405
+        "HOST": os.environ.get("DB_HOST"),  # noqa: F405
+        "PORT": os.environ.get("DB_PORT"),  # noqa: F405
+        "USER": os.environ.get("DB_USER"),  # noqa: F405
+        "PASSWORD": os.environ.get("DB_PASSWORD"),  # noqa: F405
+        "OPTIONS": {
+            "charset": "utf8mb4",
+        },
     }
 }
 
