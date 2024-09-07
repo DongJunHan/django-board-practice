@@ -6,7 +6,7 @@ from libs.models import BaseModel
 # Create your models here.
 class User(BaseModel):
     name = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=200)
     last_login = models.DateTimeField(null=True, blank=True)
 
