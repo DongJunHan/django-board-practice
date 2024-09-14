@@ -20,3 +20,10 @@ class UserListView(APIView):
         users = User.objects.all()
         serializer = GetUserSerializer(users, many=True)
         return Response(status=status.HTTP_200_OK, data=serializer.data)
+
+
+class UserDetailView(APIView):
+    def get(self, request, user_id):
+        user = User.objects.get(pk=user_id)
+        serializer = GetUserSerializer(user)
+        return Response(status=status.HTTP_200_OK, data=serializer.data)

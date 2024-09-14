@@ -22,5 +22,5 @@ from apis.v0 import api
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include(api)),
+    path("api/v0/", include(api)),
 ]
