@@ -1,6 +1,6 @@
 from rest_framework.exceptions import ValidationError
 
-from apis.v0.users.serializer import CreateSerializer
+from apis.v0.users.serializers import CreateSerializer
 from users.models import User
 
 
